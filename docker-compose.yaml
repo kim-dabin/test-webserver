@@ -1,0 +1,18 @@
+version: "3.8"
+services:
+    test-webserver:
+        container_name: "test-webserver-app"
+        restart: unless-stopped
+        build:
+            context: .
+        ports:
+            - "3000:3000"
+    nginx:
+        container_name: "test-webserver-nginx"
+        restart: always
+        build:
+            context: ./nginx
+        ports:
+            - "80:80"
+        depends_on:
+          - test-webserver
