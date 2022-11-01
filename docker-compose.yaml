@@ -1,18 +1,16 @@
 version: "3.8"
 services:
-    test-webserver:
-        container_name: "test-webserver-app"
+    backend:
+        container_name: "backend-app"
         restart: unless-stopped
         build:
-            context: .
+            context: ./backend
         ports:
-            - "3000:3000"
-    nginx:
-        container_name: "test-webserver-nginx"
+            - "6709:6709"
+    frontend:
+        container_name: "frontend-app"
         restart: always
         build:
-            context: ./nginx
+            context: ./frontend
         ports:
             - "80:80"
-        depends_on:
-          - test-webserver
